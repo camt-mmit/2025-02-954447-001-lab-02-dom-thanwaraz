@@ -14,6 +14,9 @@ export function addSection() {
   // ทำงาน input list สำหรับ section นี้
   createInputListComponent(sectionElem);
 
+  // อัปเดตปุ่มลบ section
+  updateRemoveSectionButtons();
+
   return sectionElem;
 }
 
@@ -25,6 +28,19 @@ export function regenerateSectionTitles() {
     if (titleElem) {
       titleElem.textContent = `section ${index + 1}`;
     }
+  });
+
+  // อัปเดตปุ่มลบ section
+  updateRemoveSectionButtons();
+}
+
+// ฟังก์ชันอัปเดตสถานะปุ่มลบ section
+function updateRemoveSectionButtons() {
+  const sections = [...sectionContainer.querySelectorAll('.app-cmp-section')];
+  const disable = sections.length === 1; // ถ้ามีแค่ 1 section → disable
+  sections.forEach(section => {
+    const btn = section.querySelector('.app-cmd-remove-section');
+    if (btn) btn.disabled = disable;
   });
 }
 
@@ -41,7 +57,7 @@ document.addEventListener('click', (ev) => {
     const sectionElem = ev.target.closest('.app-cmp-section');
     if (sectionElem) {
       sectionElem.remove();
-      regenerateSectionTitles();
+      regenerateSectionTitles(); // จะ disable ปุ่มถ้ามีแค่ 1 section
     }
   }
 });
