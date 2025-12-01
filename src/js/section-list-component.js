@@ -13,7 +13,7 @@ export function addSection() {
   // ทำงาน input list สำหรับ section นี้
   createInputListComponent(sectionElem);
 
-  // อัปเดตปุ่มลบ section
+  // อัปเดตปุ่มลบ section ลบ
   updateRemoveSectionButtons();
 
   return sectionElem;
