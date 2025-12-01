@@ -1,6 +1,5 @@
 import { createComponent as createInputListComponent } from './input-list-component.js';
 
-// เลือก DOM references
 const sectionContainer = document.querySelector('#section-container');
 const sectionTemplate = document.querySelector('#app-tmp-section');
 
