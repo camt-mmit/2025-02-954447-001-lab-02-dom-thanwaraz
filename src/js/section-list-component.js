@@ -1,27 +1,11 @@
 import { createComponent as createInputListComponent } from './input-list-component.js';
 
+// เลือก DOM references
 const sectionContainer = document.querySelector('#section-container');
 const sectionTemplate = document.querySelector('#app-tmp-section');
 
-// ปุ่ม Add section
-document.addEventListener('click', (ev) => {
-  if (ev.target.matches('.app-cmd-add-section')) {
-    addsection();
-    regeneratesectionTitles();
-  }
-
-  // 🟥 ลบ section
-  if (ev.target.matches('.app-cmd-remove-section')) {
-    const sectionElem = ev.target.closest('.app-cmp-section');
-    if (sectionElem) {
-      sectionElem.remove();
-      regeneratesectionTitles();
-    }
-  }
-});
-
-// 🟦 ฟังก์ชันสร้าง section ใหม่
-function addsection() {
+// ฟังก์ชันสร้าง section ใหม่
+export function addSection() {
   const sectionElem = sectionTemplate.content.cloneNode(true).firstElementChild;
 
   // append ลง container
@@ -33,10 +17,9 @@ function addsection() {
   return sectionElem;
 }
 
-// 🟩 อัปเดตชื่อ section ทั้งหมด
-function regeneratesectionTitles() {
+// ฟังก์ชันอัปเดตชื่อ section ทั้งหมด
+export function regenerateSectionTitles() {
   const sections = [...sectionContainer.querySelectorAll('.app-cmp-section')];
-
   sections.forEach((section, index) => {
     const titleElem = section.querySelector('.app-section-title');
     if (titleElem) {
@@ -45,6 +28,24 @@ function regeneratesectionTitles() {
   });
 }
 
+// Event listener ปุ่ม add/remove section
+document.addEventListener('click', (ev) => {
+  // Add section
+  if (ev.target.matches('.app-cmd-add-section')) {
+    addSection();
+    regenerateSectionTitles();
+  }
+
+  // Delete section
+  if (ev.target.matches('.app-cmd-remove-section')) {
+    const sectionElem = ev.target.closest('.app-cmp-section');
+    if (sectionElem) {
+      sectionElem.remove();
+      regenerateSectionTitles();
+    }
+  }
+});
+
 // โหลด section แรกตอนเริ่มหน้า
-addsection();
-regeneratesectionTitles();
+addSection();
+regenerateSectionTitles();

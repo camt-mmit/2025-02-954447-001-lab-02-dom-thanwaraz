@@ -137,7 +137,18 @@ input[type='number'],
   padding: 3px 20px;
 }
 
-.app-section-title{
-border-bottom: 1px solid black;
-text-align: center;
+.app-cmp-section > header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid black;
+  padding-bottom: 4px;
+}
+
+.app-section-title {
+  border-bottom: none;
+  text-align: center;
+  flex: 1; /* ให้ title ขยายกลางแถว */
 }
